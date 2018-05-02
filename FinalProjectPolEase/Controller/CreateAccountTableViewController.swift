@@ -17,33 +17,47 @@ class CreateAccountTableViewController: UITableViewController {
 	@IBOutlet weak var passwordText: UITextField!
 	
 	@IBAction func createAccountBtn(_ sender: Any) {
-		// TO DO - CREATE ACCOUNT FIREBASE AUTH
-		Auth.auth().createUser(withEmail: emailText.text!, password: passwordText.text!) { (user, error) in
-			if user != nil{
-				// user succesffully created
-				print("success")
-			}
-			else{
-				// error
-				print(error!)
+		if (self.emailText.text! == "" || self.fullNameText.text! == "" || self.usernameText.text! == "" || self.passwordText.text! == ""){
+			// One of the fields is empty -- tell user you can't create an account without filling all fields out
+			let alert = UIAlertController(title: "Fields missing", message: "Please fill out all fields before continuing", preferredStyle: .alert)
+			
+			alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+			
+			self.present(alert, animated: true)
+		}
+		else{
+			// TO DO - CREATE ACCOUNT FIREBASE AUTH
+			Auth.auth().createUser(withEmail: emailText.text!, password: passwordText.text!) { (user, error) in
+				if user != nil{
+					// user succesffully created
+					
+					let newUser = User(uID: (user?.uid)!, userEmail: self.emailText.text!, userPassword: self.passwordText.text!, userFullName: self.fullNameText.text!, userUsername: self.usernameText.text!)
+					
+					newUser.save(id: (user?.uid)!)
+				}
+				else{
+					// error
+					let alert = UIAlertController(title: "Error", message: "Badly formatted email or password", preferredStyle: .alert)
+					
+					alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+					
+					self.present(alert, animated: true)
+				}
 			}
 		}
-		
-		
 
 	}
 	
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

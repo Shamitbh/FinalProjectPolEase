@@ -19,15 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		FirebaseApp.configure()
 		
-		
-//		var ref: DatabaseReference!
-//
-//		ref = Database.database().reference().child("users1").child("myUser")
-//
-//		ref.setValue("random value")
-		
-		
-		
 		return true
 	}
 
