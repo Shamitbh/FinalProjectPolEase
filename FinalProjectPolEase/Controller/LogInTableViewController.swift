@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseAuth
 
 class LogInTableViewController: UITableViewController {
 	
@@ -16,6 +16,36 @@ class LogInTableViewController: UITableViewController {
 	
 	@IBAction func loginBtn(_ sender: Any) {
 		// Log in the user and display his/her cases in table view next
+		if (self.userEmailLoginText.text! == "" || self.userPasswordLoginText.text! == ""){
+			// One of the fields is empty -- tell user you can't log in to account without filling all fields out
+			let alert = UIAlertController(title: "Fields missing", message: "Please fill out all fields before continuing", preferredStyle: .alert)
+			
+			alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+			
+			self.present(alert, animated: true)
+		}
+		else{
+			// TO DO - LOG IN TO USER ACCOUNT
+			
+			Auth.auth().signIn(withEmail: userEmailLoginText.text!, password: userPasswordLoginText.text!) { (user, error) in
+				if (user != nil){
+					// user successfully logged in
+					print("Successfully logged in!")
+					self.performSegue(withIdentifier: "loginToDash", sender: self)
+				}
+				else{
+					print("No user found")
+					let alert = UIAlertController(title: "No user found", message: "There is no user in the database with those credentials.", preferredStyle: .alert)
+
+					alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+
+					self.present(alert, animated: true)
+					
+				}
+			}
+		}
+		
+		
 	}
 	
 

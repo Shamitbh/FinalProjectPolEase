@@ -30,10 +30,13 @@ class CreateAccountTableViewController: UITableViewController {
 			Auth.auth().createUser(withEmail: emailText.text!, password: passwordText.text!) { (user, error) in
 				if user != nil{
 					// user succesffully created
-					
 					let newUser = User(uID: (user?.uid)!, userEmail: self.emailText.text!, userPassword: self.passwordText.text!, userFullName: self.fullNameText.text!, userUsername: self.usernameText.text!)
 					
 					newUser.save(id: (user?.uid)!)
+					
+					// go back to welcome screen
+					self.performSegue(withIdentifier: "createAccToWelcome", sender: self)
+					
 				}
 				else{
 					// error

@@ -7,10 +7,27 @@
 //
 
 import UIKit
+import FirebaseAuth
+
+var tempCases = ["case 1", "case 2", "case 3"]
+
 
 class DashboardCasesTableViewController: UITableViewController {
 
-    override func viewDidLoad() {
+	@IBAction func logoutButtonTap(_ sender: Any) {
+		// sign user out from auth
+		let firebaseAuth = Auth.auth()
+		do {
+			try firebaseAuth.signOut()
+			print("succeesssss")
+		} catch let signOutError as NSError {
+			print ("Error signing out: %@", signOutError)
+		}
+		// perform segue
+		performSegue(withIdentifier: "logoutSegue", sender: sender)
+		
+	}
+	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -29,23 +46,23 @@ class DashboardCasesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return tempCases.count
     }
 
-    /*
+	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         // Configure the cell...
-
+		cell.textLabel?.text = tempCases[indexPath.row]
+	
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
