@@ -6,7 +6,11 @@ target 'FinalProjectPolEase' do
   use_frameworks!
 
   # Pods for FinalProjectPolEase
-
+	pod 'Firebase/Core'
+	pod 'Firebase/Database'
+	pod 'Firebase/Auth'
+	pod 'Firebase/Storage'
+	
   target 'FinalProjectPolEaseTests' do
     inherit! :search_paths
     # Pods for testing
@@ -18,10 +22,7 @@ target 'FinalProjectPolEase' do
   end
 
 
-pod 'Firebase/Core'
-pod 'Firebase/Database'
-pod 'Firebase/Auth'
-pod 'Firebase/Storage'
+	
 
 
 end

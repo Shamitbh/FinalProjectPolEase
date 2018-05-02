@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		1AFC60D3911DFE582CE8AF8B /* Pods_FinalProjectPolEaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F31DC597989D0FA09EA95005 /* Pods_FinalProjectPolEaseUITests.framework */; };
 		521F9BA220954AD100D01421 /* Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521F9BA120954AD100D01421 /* Case.swift */; };
+		525AC89B209907A900D35A70 /* DashboardCasesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525AC89A209907A900D35A70 /* DashboardCasesTableViewController.swift */; };
+		525AC89F2099083000D35A70 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525AC89E2099083000D35A70 /* AddViewController.swift */; };
+		525AC8A320991AA500D35A70 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525AC8A220991AA500D35A70 /* CreateAccountTableViewController.swift */; };
+		525AC8A520991ACE00D35A70 /* LogInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525AC8A420991ACE00D35A70 /* LogInTableViewController.swift */; };
+		525AC8A720991E1C00D35A70 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525AC8A620991E1C00D35A70 /* User.swift */; };
 		5267B457209003D0007FA617 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267B456209003D0007FA617 /* AppDelegate.swift */; };
 		5267B459209003D0007FA617 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267B458209003D0007FA617 /* ViewController.swift */; };
 		5267B45C209003D0007FA617 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5267B45A209003D0007FA617 /* Main.storyboard */; };
@@ -44,6 +49,11 @@
 		4359F39E59CFCDEB7BC05ACF /* Pods-FinalProjectPolEaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProjectPolEaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FinalProjectPolEaseUITests/Pods-FinalProjectPolEaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		45AD63BBDD14817D3022B275 /* Pods-FinalProjectPolEase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProjectPolEase.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalProjectPolEase/Pods-FinalProjectPolEase.release.xcconfig"; sourceTree = "<group>"; };
 		521F9BA120954AD100D01421 /* Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Case.swift; sourceTree = "<group>"; };
+		525AC89A209907A900D35A70 /* DashboardCasesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCasesTableViewController.swift; sourceTree = "<group>"; };
+		525AC89E2099083000D35A70 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		525AC8A220991AA500D35A70 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
+		525AC8A420991ACE00D35A70 /* LogInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInTableViewController.swift; sourceTree = "<group>"; };
+		525AC8A620991E1C00D35A70 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5267B453209003D0007FA617 /* FinalProjectPolEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProjectPolEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5267B456209003D0007FA617 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5267B458209003D0007FA617 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				521F9BA120954AD100D01421 /* Case.swift */,
+				525AC8A620991E1C00D35A70 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,6 +135,10 @@
 			isa = PBXGroup;
 			children = (
 				5267B458209003D0007FA617 /* ViewController.swift */,
+				525AC89A209907A900D35A70 /* DashboardCasesTableViewController.swift */,
+				525AC89E2099083000D35A70 /* AddViewController.swift */,
+				525AC8A220991AA500D35A70 /* CreateAccountTableViewController.swift */,
+				525AC8A420991ACE00D35A70 /* LogInTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -345,12 +360,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FinalProjectPolEase/Pods-FinalProjectPolEase-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -421,8 +438,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525AC89F2099083000D35A70 /* AddViewController.swift in Sources */,
+				525AC89B209907A900D35A70 /* DashboardCasesTableViewController.swift in Sources */,
 				5267B459209003D0007FA617 /* ViewController.swift in Sources */,
+				525AC8A320991AA500D35A70 /* CreateAccountTableViewController.swift in Sources */,
+				525AC8A720991E1C00D35A70 /* User.swift in Sources */,
 				521F9BA220954AD100D01421 /* Case.swift in Sources */,
+				525AC8A520991ACE00D35A70 /* LogInTableViewController.swift in Sources */,
 				5267B457209003D0007FA617 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
