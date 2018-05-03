@@ -31,7 +31,7 @@ class AddViewController: UIViewController, UINavigationControllerDelegate, UIIma
 		
 			let newCase = Case(title: caseTitle.text!, description: caseDescription.text!, imageString: "myImageString")
 			
-			
+			let myasdfsa
 			if Auth.auth().currentUser != nil {
 				// User is signed in.
 				print("Yes! We found the user")
