@@ -50,11 +50,11 @@ class Case{
 	}
 	
 	
-	func saveCase(id: String, caseID: String){
+	func saveCase(id: String){
 		
 		var ref: DatabaseReference!
 		
-		ref = Database.database().reference().child("users").child(id).child("cases").child(caseID)
+		ref = Database.database().reference().child("users").child(id).child("cases").childByAutoId()
 		
 		ref.setValue(toDictionary())
 	}

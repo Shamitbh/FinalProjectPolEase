@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class AddViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+	let model: UserModel = UserModel.shared
+	
 	@IBAction func cancelBtn(_ sender: Any) {
 		self.dismiss(animated: true, completion: nil)
 	}
@@ -27,7 +29,6 @@ class AddViewController: UIViewController, UINavigationControllerDelegate, UIIma
 		}else{
 			// create the case and assign to the user
 		
-//			let newCase = Case(title: caseTitle.text!, description: caseDescription.text!, image: myImageView.image!)
 			let newCase = Case(title: caseTitle.text!, description: caseDescription.text!, imageString: "myImageString")
 			
 			
@@ -36,23 +37,22 @@ class AddViewController: UIViewController, UINavigationControllerDelegate, UIIma
 				print("Yes! We found the user")
 				let currUser = Auth.auth().currentUser
 				
-				newCase.saveCase(id: (currUser?.uid)!, caseID: "Case01")
 				
-				// save the case to the current user database
+				// Get the actual user object via currUser.uid in UserModel
+				let actualUserObject = self.model.getUserById(uid: (currUser?.uid)!)
+				// Update the userModel (append this new case to the actual user object list of cases)
+				actualUserObject?.listOfCases.append(newCase)
 				
+				// save the case to the current user database on firebase
+				newCase.saveCase(id: (currUser?.uid)!)
 				
 				
 			} else {
 				// No user is signed in.
 				print("No user signed in right now.")
 			}
-			
 			self.dismiss(animated:true, completion: nil)
 		}
-		
-
-		
-		
 	}
 	
 	@IBOutlet weak var caseTitle: UITextField!
@@ -80,7 +80,6 @@ class AddViewController: UIViewController, UINavigationControllerDelegate, UIIma
 		else{
 			// error message
 		}
-		
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -91,6 +90,11 @@ class AddViewController: UIViewController, UINavigationControllerDelegate, UIIma
         // Do any additional setup after loading the view.
     }
 
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		self.view.endEditing(true)
+	}
+	
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

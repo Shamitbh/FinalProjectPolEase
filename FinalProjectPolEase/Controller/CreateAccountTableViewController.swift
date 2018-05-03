@@ -11,6 +11,9 @@ import FirebaseAuth
 
 class CreateAccountTableViewController: UITableViewController {
 
+	let model: UserModel = UserModel.shared
+	
+	
 	@IBOutlet weak var emailText: UITextField!
 	@IBOutlet weak var fullNameText: UITextField!
 	@IBOutlet weak var usernameText: UITextField!
@@ -32,6 +35,11 @@ class CreateAccountTableViewController: UITableViewController {
 					// user succesffully created
 					let newUser = User(uID: (user?.uid)!, userEmail: self.emailText.text!, userPassword: self.passwordText.text!, userFullName: self.fullNameText.text!, userUsername: self.usernameText.text!)
 					
+					// save to model
+					self.model.addUser(user: newUser)
+					print(self.model.numberOfUsers())
+					
+					// save to firebase
 					newUser.save(id: (user?.uid)!)
 					
 					// go back to welcome screen
@@ -40,7 +48,7 @@ class CreateAccountTableViewController: UITableViewController {
 				}
 				else{
 					// error
-					let alert = UIAlertController(title: "Error", message: "Badly formatted email or password", preferredStyle: .alert)
+					let alert = UIAlertController(title: "Error", message: "Badly formatted email or password or user already in database", preferredStyle: .alert)
 					
 					alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
 					
@@ -60,6 +68,7 @@ class CreateAccountTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+	
 	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

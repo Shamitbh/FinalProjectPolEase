@@ -54,6 +54,7 @@ class User{
 			"username" : userUsername,
 			"fullName" : userFullName,
 			"email" : userEmail,
+			"password" : userPassword,
 			"cases" : []
 		]
 	}
