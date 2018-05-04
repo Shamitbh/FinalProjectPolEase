@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 
+
 class AddViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
 	let model: UserModel = UserModel.shared
@@ -30,8 +31,7 @@ class AddViewController: UIViewController, UINavigationControllerDelegate, UIIma
 			// create the case and assign to the user
 		
 			let newCase = Case(title: caseTitle.text!, description: caseDescription.text!, imageString: "myImageString")
-			
-			let myasdfsa
+	
 			if Auth.auth().currentUser != nil {
 				// User is signed in.
 				print("Yes! We found the user")

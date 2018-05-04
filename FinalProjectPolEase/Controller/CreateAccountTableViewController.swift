@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseAuth
 
+
+
 class CreateAccountTableViewController: UITableViewController {
 
 	let model: UserModel = UserModel.shared
@@ -43,6 +45,7 @@ class CreateAccountTableViewController: UITableViewController {
 					newUser.save(id: (user?.uid)!)
 					
 					// go back to welcome screen
+					intToControlPopup = 10
 					self.performSegue(withIdentifier: "createAccToWelcome", sender: self)
 					
 				}
