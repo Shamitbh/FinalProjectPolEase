@@ -502,10 +502,6 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="kf3-JD-Pfd" id="hvQ-ob-fX9"/>
-                            <outlet property="delegate" destination="kf3-JD-Pfd" id="7hE-0d-8pg"/>
-                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Dashboard of Cases" id="KGY-vR-K6J">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="yEK-Sa-hWh">
@@ -520,6 +516,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="myTableView" destination="KXA-BU-SqH" id="ToR-kF-aaI"/>
+                        <segue destination="m6z-Zv-diB" kind="presentation" identifier="tableSegue" id="eEv-x8-KLS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ced-P4-nJZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -685,6 +685,7 @@
         <image name="police" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2Qr-YO-5VC"/>
+        <segue reference="eEv-x8-KLS"/>
+        <segue reference="v6x-k9-X2I"/>
     </inferredMetricsTieBreakers>
 </document>

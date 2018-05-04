@@ -70,5 +70,14 @@ class User{
 	}
 	
 	
+	func deleteCase(caseIDNum: String){
+		
+		var ref: DatabaseReference!
+		
+		ref = Database.database().reference().child("users").child(self.uID).child("cases").child(caseIDNum)
+		
+		ref.removeValue()
+	}
+	
 	
 }

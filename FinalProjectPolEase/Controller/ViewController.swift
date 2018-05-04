@@ -33,27 +33,25 @@ class ViewController: UIViewController {
 					
 					if (snapshot.childrenCount > 0){
 						// data exists in firebase already
-						print("Data exists!")
 						// Get user value
 						let value = snapshot.value as? NSDictionary
 						
 						// Go through all the user's in the value snapshot with loop
 						let userCountInDb = value?.count
 						for index in 0..<userCountInDb!{
-							print("\n\n****")
 							// get each User's dictionary, and then get user's email, password, etc.
 							let tempUserDict = value?.allValues[index] as! Dictionary<String, AnyObject>
-							print(tempUserDict)
+							
 							let emailTemp = tempUserDict["email"]
-							print(emailTemp!)
+							
 							let fullNameTemp = tempUserDict["fullName"]
-							print(fullNameTemp!)
+							
 							let passwordTemp = tempUserDict["password"]
-							print(passwordTemp!)
+							
 							let uidTemp = tempUserDict["uid"]
-							print(uidTemp!)
+							
 							let usernameTemp = tempUserDict["username"]
-							print(usernameTemp!)
+							
 							
 							if (tempUserDict.count == 6){
 								// that means that this user has cases
@@ -70,10 +68,7 @@ class ViewController: UIViewController {
 									let caseTitleTemp = tempCaseDict["caseTitle"]
 									let caseDescriptionTemp = tempCaseDict["caseDescription"]
 									let caseImageStringTemp = tempCaseDict["caseImageString"]
-									print("Cases go here!!!!")
-									print(caseTitleTemp!)
-									print(caseDescriptionTemp!)
-									print(caseImageStringTemp!)
+									
 									let newCaseObj = Case(title: caseTitleTemp as! String, description: caseDescriptionTemp as! String, imageString: caseImageStringTemp as! String)
 									caseList.append(newCaseObj)
 								
@@ -95,7 +90,7 @@ class ViewController: UIViewController {
 						}
 					}
 					else{
-						print("Data does NOT exist!")
+						// Data doesn't exist yet in firebase.
 					}
 					
 				}) { (error) in
@@ -124,8 +119,8 @@ class ViewController: UIViewController {
 			alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
 			
 			self.present(alert, animated: true)
-			
 		}
+
 	}
 
 }

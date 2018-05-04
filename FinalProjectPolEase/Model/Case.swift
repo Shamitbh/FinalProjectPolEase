@@ -17,6 +17,7 @@ class Case{
 	var description: String
 	var image: UIImage
 	var imageString: String
+	var caseID: String
 	
 //	// Custom init
 //	convenience init(studentId: String) {
@@ -30,6 +31,7 @@ class Case{
 		self.image = image
 		// Remeber to initialize imageString for data
 		self.imageString = ""
+		self.caseID = ""
 	}
 	
 	init(title: String, description: String, imageString: String) {
@@ -39,13 +41,15 @@ class Case{
 		self.image = UIImage()
 		// Remeber to initialize imageString for data
 		self.imageString = imageString
+		self.caseID = ""
 	}
 	
 	func toDictionary() -> [String: Any] {
 		return [
 			"caseTitle" : title,
 			"caseDescription" : description,
-			"caseImageString" : imageString
+			"caseImageString" : imageString,
+			"caseID" : caseID
 		]
 	}
 	
@@ -55,6 +59,16 @@ class Case{
 		var ref: DatabaseReference!
 		
 		ref = Database.database().reference().child("users").child(id).child("cases").childByAutoId()
+		self.caseID = ref.key
+		
+		ref.setValue(toDictionary())
+	}
+	
+	
+	func saveCaseWithID(userID: String, caseID: String){
+		var ref: DatabaseReference!
+		
+		ref = Database.database().reference().child("users").child(userID).child("cases").child(caseID)
 		
 		ref.setValue(toDictionary())
 	}

@@ -9,17 +9,27 @@
 import UIKit
 import FirebaseAuth
 
-var tempCases = ["case 1", "case 2", "case 3"]
 
+var myIndex = 0
+var intToControlCellClick = 0
 
 class DashboardCasesTableViewController: UITableViewController {
+	
+	@IBOutlet weak var myTableView: UITableView!
+	
+	let model: UserModel = UserModel.shared
 
 	@IBAction func logoutButtonTap(_ sender: Any) {
+		
+		intToControlPopup = 0
+		
+		updateFB()
+		
 		// sign user out from auth
 		let firebaseAuth = Auth.auth()
 		do {
 			try firebaseAuth.signOut()
-			print("succeesssss")
+
 		} catch let signOutError as NSError {
 			print ("Error signing out: %@", signOutError)
 		}
@@ -29,14 +39,35 @@ class DashboardCasesTableViewController: UITableViewController {
 	}
 	override func viewDidLoad() {
         super.viewDidLoad()
-
+		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+		
+		// update the user's case list from model into firebase
+		
+		myTableView.delegate = self
+		myTableView.dataSource = self
+	
     }
 
+	override func viewDidAppear(_ animated: Bool) {
+		myTableView.reloadData()
+	}
+	func updateFB(){
+		let id = Auth.auth().currentUser?.uid
+		let currUser = self.model.getUserById(uid: id!)
+		print(currUser?.listOfCases as Any)
+		for eachCase in (currUser?.listOfCases)!{
+			let caseID = eachCase.caseID
+			
+			eachCase.saveCaseWithID(userID: id!, caseID: caseID)
+			
+		}
+	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -51,15 +82,24 @@ class DashboardCasesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return tempCases.count
+		
+		let id = Auth.auth().currentUser?.uid
+		let currUser = self.model.getUserById(uid: id!)
+		
+		return (currUser?.listOfCases.count)!
+		
     }
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
+		// get the user
+		let id = Auth.auth().currentUser?.uid
+		let currUser = self.model.getUserById(uid: id!)
+		
         // Configure the cell...
-		cell.textLabel?.text = tempCases[indexPath.row]
+		cell.textLabel?.text = currUser?.listOfCases[indexPath.row].title
 	
         return cell
     }
@@ -72,18 +112,32 @@ class DashboardCasesTableViewController: UITableViewController {
     }
     */
 
-    /*
+	
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+			// Delete from model and delete from firebase
+			let id = Auth.auth().currentUser?.uid
+			let currUser = self.model.getUserById(uid: id!)
+			
+			// removes from userModel
+			currUser?.listOfCases.remove(at: indexPath.row)
+			
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            myTableView.deleteRows(at: [indexPath], with: .fade)
+			
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		myIndex = indexPath.row
+		intToControlCellClick = 5
+		
+		performSegue(withIdentifier: "tableSegue", sender: self)
+		
+	}
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

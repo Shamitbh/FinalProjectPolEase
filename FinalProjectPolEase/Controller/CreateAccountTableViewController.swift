@@ -9,8 +9,6 @@
 import UIKit
 import FirebaseAuth
 
-
-
 class CreateAccountTableViewController: UITableViewController {
 
 	let model: UserModel = UserModel.shared
@@ -39,7 +37,6 @@ class CreateAccountTableViewController: UITableViewController {
 					
 					// save to model
 					self.model.addUser(user: newUser)
-					print(self.model.numberOfUsers())
 					
 					// save to firebase
 					newUser.save(id: (user?.uid)!)
@@ -65,6 +62,7 @@ class CreateAccountTableViewController: UITableViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		intToControlPopup = 0
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
